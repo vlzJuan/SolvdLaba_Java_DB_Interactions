@@ -7,10 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CareerDAO {
+public class CareerDAO extends AbstractDAO<Career, Integer> {
 
     private static final String INSERT_CAREER = "INSERT INTO careers (career_id, name, level, department_id) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_CAREER = "UPDATE careers SET name = ?, level = ?, department_id = ? WHERE career_id = ?";
@@ -18,10 +17,9 @@ public class CareerDAO {
     private static final String SELECT_CAREER_BY_ID = "SELECT * FROM careers WHERE career_id = ?";
     private static final String SELECT_ALL_CAREERS = "SELECT * FROM careers";
 
-    private final ConnectionPool pool;
 
     public CareerDAO(ConnectionPool connPool) {
-        this.pool = connPool;
+        super(connPool);
     }
 
     public void insert(Career career) {
@@ -47,7 +45,9 @@ public class CareerDAO {
             PreparedStatement st = conn.prepareStatement(SELECT_CAREER_BY_ID);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
-            ret = mapResultSetToCareer(rs);
+            if(rs.next()){
+                ret = mapRecord(rs);
+            }
         } catch (SQLException exc) {
             System.out.println("Error, no such career with the specified ID.");
         } finally {
@@ -85,7 +85,7 @@ public class CareerDAO {
         }
     }
 
-    private Career mapResultSetToCareer(ResultSet resultSet) throws SQLException {
+    protected Career mapRecord(ResultSet resultSet) throws SQLException {
         Career ret = null;
         if (resultSet.next()) {
             int careerId = resultSet.getInt("career_id");
@@ -112,13 +112,6 @@ public class CareerDAO {
         return ret;
     }
 
-    private List<Career> mapResultSet(ResultSet rs) throws SQLException {
-        List<Career> ret = new ArrayList<>();
-        Career aux;
-        while ((aux = this.mapResultSetToCareer(rs)) != null) {
-            ret.add(aux);
-        }
-        return ret;
-    }
+
 
 }
