@@ -7,7 +7,7 @@ public class Enrollment {
     public int enrollmentId;
     public Date date;
     public int studentId;
-    public float finalGrade;
+    public Float finalGrade;
     public int courseId;
     public int professorId;
     public int classroomId;
@@ -25,7 +25,6 @@ public class Enrollment {
 
     // Getters, setters and other methods TBI.
     // IMPORTANT: The average calculation has to be performed using queries, will do this here later.
-
 
 
 }

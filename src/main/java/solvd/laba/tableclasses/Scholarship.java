@@ -20,6 +20,6 @@ public class Scholarship {
                 + description + "\n";
     }
 
-    //Getters and setters TBI
+    //Getters and setters TBI. Public for now
 
 }

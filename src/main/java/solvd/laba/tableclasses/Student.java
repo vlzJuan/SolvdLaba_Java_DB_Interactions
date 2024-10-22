@@ -26,11 +26,11 @@ public class Student {
 
     @Override
     public String toString(){
-        return "Student " + studentId + ", full name: " + name + " " + surname + "\n"
+        return "{Student " + studentId + ", full name: " + name + " " + surname + "\n"
                 + "Date of birth: " + dateOfBirth + "\n"
                 + "Phone: " + phoneNumber + "\n"
                 + "E-mail: " + email + "\n"
-                + "Career id: " + careerId;
+                + "Career id: " + careerId + "}\n";
     }
 
 
