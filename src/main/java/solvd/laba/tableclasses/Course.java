@@ -6,7 +6,7 @@ public class Course {
     public int courseId;
     public String name;
     public int credits;
-    public int prerequisite;
+    public Integer prerequisite;
 
 
     public Course(int courseId, String name, int credits){
