@@ -1,8 +1,11 @@
 package solvd.laba.connections;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ConnectionPool implements AutoCloseable{
@@ -15,7 +18,20 @@ public class ConnectionPool implements AutoCloseable{
     private final String user;
     private final String password;
 
+    // use this one to load credentials from file
+    public ConnectionPool(int size) throws IOException {
+        this.availableConnections = new LinkedBlockingQueue<>(size);
+        this.hasBeenInitialized = false;
 
+        // Load properties from config file
+        Properties props = new Properties();
+        try (FileInputStream input = new FileInputStream("src/main/resources/mysqlconnection.credentials")) {
+            props.load(input);
+        }
+        this.url = props.getProperty("mysql.url");
+        this.user = props.getProperty("mysql.user");
+        this.password = props.getProperty("mysql.password");
+    }
 
     public ConnectionPool(int size, String url, String user, String password) {
         this.availableConnections = new LinkedBlockingQueue<>(size);
