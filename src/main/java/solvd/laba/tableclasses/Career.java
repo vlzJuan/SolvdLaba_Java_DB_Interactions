@@ -4,7 +4,7 @@ public class Career {
 
     public int careerId;
     public String name;
-    public String level;
+    public String level;    // Should validate only specific levels using enums
     public int departmentId;
 
     public Career(int careerId, String name, String level, int departmentId){
