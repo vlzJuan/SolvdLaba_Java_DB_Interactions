@@ -2,7 +2,7 @@ package solvd.laba.services;
 
 import solvd.laba.connections.ConnectionPool;
 import solvd.laba.tableclasses.Student;
-import solvd.laba.dao.StudentDAO;
+import solvd.laba.mysqldaos.StudentDAO;
 
 import java.io.IOException;
 import java.sql.Date;
