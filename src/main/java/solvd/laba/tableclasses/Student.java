@@ -1,6 +1,8 @@
 package solvd.laba.tableclasses;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Student {
 
@@ -11,6 +13,24 @@ public class Student {
     public String phoneNumber;
     public String email;
     public int careerId;
+
+
+    /**
+     * Constructor added to properly use reflection
+     * @param id
+     * @param name
+     * @param surname
+     * @param dateString
+     * @param phoneNum
+     * @param email
+     * @param careerId
+     */
+    public Student(int id, String name, String surname, String dateString,
+                   String phoneNum, String email, int careerId){
+        this(id, name, surname,
+                Date.valueOf(LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
+                phoneNum, email, careerId);
+    }
 
 
     public Student(int id, String name, String surname, Date dob,
@@ -33,14 +53,5 @@ public class Student {
                 + "Career id: " + careerId + "}\n";
     }
 
-
-    // Getters
-    //public int getStudentId(){      return this.studentId; }
-    //public String getName(){        return this.name;}
-    //public String getSurname(){     return this.surname;}
-    //public Date getDateOfBirth(){   return this.dateOfBirth;}
-    //public String getPhoneNumber(){ return this.phoneNumber;}
-    //public String getEmail(){       return this.email;}
-    //public int getCareerId(){       return this.careerId;}
 
 }
