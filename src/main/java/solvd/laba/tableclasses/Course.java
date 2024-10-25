@@ -9,14 +9,10 @@ public class Course {
     public Integer prerequisite;
 
 
-    public Course(int courseId, String name, int credits){
+    public Course(int courseId, String name, int credits, Integer prerequisite){
         this.courseId = courseId;
         this.name = name;
         this.credits = credits;
-    }
-
-    public Course(int courseId, String name, int credits, int prerequisite){
-        this(courseId, name, credits);
         this.prerequisite = prerequisite;
 
     }
