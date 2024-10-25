@@ -5,8 +5,6 @@ import solvd.laba.dao.AbstractDAO;
 import solvd.laba.mysqldaos.*;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Parameter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -87,20 +85,20 @@ public class DBInteractionLayer {
                 int option = scan.nextInt();
                 scan.nextLine();
                 switch(option){
-                    case 1: daoInstance.insert((T) createObjectForDAO(scan, daoInstance));
+                    case 1: daoInstance.insert((T) ServiceLayer.createObjectForDAO(scan, daoInstance));
                             break;
                     case 2: System.out.println("Enter the key required to read: ");
                             System.out.println(daoInstance.read((ID)scan.nextLine()).toString());
                             break;
                     case 3:
-                            daoInstance.update((T) createObjectForDAO(scan, daoInstance));
+                            daoInstance.update((T) ServiceLayer.createObjectForDAO(scan, daoInstance));
                             break;
                     case 4:
                             System.out.println("Enter the key required to delete: ");
                             System.out.println(daoInstance.read((ID)scan.nextLine()).toString());
                             break;
                     case 5:
-                            System.out.println("The complete resultset is:");
+                            System.out.println("The complete result set is:");
                             for (T value: daoInstance.findAll()) {
                                 System.out.println(value);
                             }
@@ -125,45 +123,6 @@ public class DBInteractionLayer {
         }
 
 
-    private static Object createObjectForDAO(Scanner scanner, Object daoInstance) {
-        Object ret = null;
-        try {
-            Class<?> daoClass = daoInstance.getClass(); // Get the actual class from daoInstance param
-            Class<?> entityType = (Class<?>) ((java.lang.reflect.ParameterizedType) daoClass
-                    .getGenericSuperclass()).getActualTypeArguments()[0]; // Get the explicit argument from T.
 
-            Constructor<?> constructor = entityType.getConstructors()[0]; // The no-weird-stuff-constructor
-
-            Parameter[] params = constructor.getParameters();
-            Object[] paramValues = new Object[params.length];
-
-            System.out.println("Creating a new " + entityType.getSimpleName() + " object:");
-            for (int i = 0; i < params.length; i++) {
-                Class<?> paramType = params[i].getType();
-                System.out.print("Enter value for " + params[i].getName() + " (" + paramType.getSimpleName() + "): ");
-                String input = scanner.nextLine();
-                paramValues[i] = parseInput(input, paramType);  // Helper function for parsing
-            }
-
-            // Instantiate the entity using the collected parameter values
-            ret = constructor.newInstance(paramValues);
-
-        } catch (Exception e) {
-            System.out.println("Error creating the object. Operation aborted.");
-        }
-        return ret;
-    }
-
-    // Helper method to parse the user input based on the type
-    private static Object parseInput(String input, Class<?> paramType) {
-
-        if (paramType == int.class || paramType == Integer.class) {
-            return Integer.parseInt(input);
-        } else if (paramType == float.class || paramType == Float.class) {
-            return Float.parseFloat(input);
-        } else {
-            return input; // For String or other unsupported types
-        }
-    }
 
 }
