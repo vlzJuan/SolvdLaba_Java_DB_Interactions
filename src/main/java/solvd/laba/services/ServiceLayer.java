@@ -34,8 +34,8 @@ public class ServiceLayer {
 
         switch(option){
             case 1:
-                    TestStudentDAO.execute();
-                    break;
+                TestStudentDAO.execute();
+                break;
             case 2:
                 try{
                     DBInteractionLayer menu = new DBInteractionLayer();
@@ -44,18 +44,16 @@ public class ServiceLayer {
                 catch (IOException exc){
                     System.out.println("DB menu unable to be instantiated.");
                 }
-                    break;
+                break;
             case 3:
-                    if(XMLInteractionLayer.validate(scan)){
-                        XMLInteractionLayer.execute();
-                    }
+                if(XMLInteractionLayer.validate(scan)){
+                    XMLInteractionLayer.execute(scan);
+                }
 
-                    break;
+                break;
             default:
                     System.out.println("No valid interaction option selected, operation aborted.");
         }
     }
-
-
 
 }
