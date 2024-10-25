@@ -1,8 +1,6 @@
 package solvd.laba.tableclasses;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Student {
 
@@ -17,18 +15,21 @@ public class Student {
 
     /**
      * Constructor added to properly use reflection
-     * @param id
-     * @param name
-     * @param surname
-     * @param dateString
-     * @param phoneNum
-     * @param email
-     * @param careerId
+     * @param id            , the identifier for the Student.
+     * @param name          , the name of the student
+     * @param surname       , the surname of the student
+     * @param dateString    , the date of birth for the student, as a string (Should use yyyy-MM-dd format)
+     *                      The format is not verified, but it will throw an exception if the parameter is
+     *                      in another format.
+     * @param phoneNum      , the phone number for the student.
+     *                      It has this format to allow the inclusion of area codes and such (EX: (+54)2944...)
+     * @param email         The email of the student
+     * @param careerId      the ID for the career associated to the student.
      */
     public Student(int id, String name, String surname, String dateString,
                    String phoneNum, String email, int careerId){
         this(id, name, surname,
-                Date.valueOf(LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
+                Date.valueOf(dateString),
                 phoneNum, email, careerId);
     }
 
