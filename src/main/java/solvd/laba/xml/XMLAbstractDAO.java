@@ -23,4 +23,8 @@ public abstract class XMLAbstractDAO<T, ID> implements XMLCoreDAO<T, ID>{
         parent.appendChild(element);
     }
 
+    public boolean hasDocument(){
+        return this.document!=null;
+    }
+
 }
