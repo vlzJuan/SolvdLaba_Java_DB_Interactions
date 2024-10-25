@@ -1,5 +1,6 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Scholarship;
 import solvd.laba.connections.ConnectionPool;
 
@@ -15,7 +16,7 @@ public class ScholarshipDAO extends AbstractDAO<Scholarship, Integer> {
     private static final String UPDATE_SCHOLARSHIP = "UPDATE scholarships SET name = ?, description = ?, sponsored_percentage = ? WHERE scholarship_id = ?";
     private static final String DELETE_SCHOLARSHIP = "DELETE FROM scholarships WHERE scholarship_id = ?";
     private static final String SELECT_SCHOLARSHIP_BY_ID = "SELECT * FROM scholarships WHERE scholarship_id = ?";
-    private static final String SELECT_ALL_SCHOLARSHIPS = "SELECT * FROM scholarships";
+    public static final String SELECT_ALL_SCHOLARSHIPS = "SELECT * FROM scholarships";
 
     public ScholarshipDAO(ConnectionPool pool) {
         super(pool);

@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDualKeyDAO;
 import solvd.laba.tableclasses.ExamScore;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class ExamScoreDAO extends AbstractDualKeyDAO<ExamScore, Integer, Integer
     private static final String UPDATE_EXAM_SCORE = "UPDATE exam_scores SET score = ?, retry_score = ? WHERE exam_id = ? AND enrollment_id = ?";
     private static final String DELETE_EXAM_SCORE = "DELETE FROM exam_scores WHERE exam_id = ? AND enrollment_id = ?";
     private static final String SELECT_EXAM_SCORE = "SELECT * FROM exam_scores WHERE exam_id = ? AND enrollment_id = ?";
-    private static final String SELECT_ALL_EXAM_SCORES = "SELECT * FROM exam_scores";
+    public static final String SELECT_ALL_EXAM_SCORES = "SELECT * FROM exam_scores";
 
     public ExamScoreDAO(ConnectionPool pool) {
         super(pool);

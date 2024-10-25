@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDualKeyDAO;
 import solvd.laba.tableclasses.JoinedTableStudentScholarship;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class JoinedTableStudentScholarshipDAO extends AbstractDualKeyDAO<JoinedT
     private static final String SELECT_QUERY = "SELECT * FROM joined_table_student_scholarship WHERE student_id = ? AND scholarship_id = ?";
     private static final String UPDATE_QUERY = "UPDATE joined_table_student_scholarship SET scholarship_id = ? WHERE student_id = ?";
     private static final String DELETE_QUERY = "DELETE FROM joined_table_student_scholarship WHERE student_id = ? AND scholarship_id = ?";
-    private static final String SELECT_ALL_QUERY = "SELECT * FROM joined_table_student_scholarship";
+    public static final String SELECT_ALL_QUERY = "SELECT * FROM joined_table_student_scholarship";
 
     public JoinedTableStudentScholarshipDAO(ConnectionPool connPool) {
         super(connPool);

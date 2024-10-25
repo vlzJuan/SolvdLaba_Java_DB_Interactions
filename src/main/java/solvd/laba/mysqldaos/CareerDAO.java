@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Career;
 
 import java.sql.Connection;
@@ -15,8 +16,7 @@ public class CareerDAO extends AbstractDAO<Career, Integer> {
     private static final String UPDATE_CAREER = "UPDATE careers SET name = ?, level = ?, department_id = ? WHERE career_id = ?";
     private static final String DELETE_CAREER = "DELETE FROM careers WHERE career_id = ?";
     private static final String SELECT_CAREER_BY_ID = "SELECT * FROM careers WHERE career_id = ?";
-    private static final String SELECT_ALL_CAREERS = "SELECT * FROM careers";
-
+    public static final String SELECT_ALL_CAREERS = "SELECT * FROM careers";
 
     public CareerDAO(ConnectionPool connPool) {
         super(connPool);

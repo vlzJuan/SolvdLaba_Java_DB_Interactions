@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Office;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class OfficeDAO extends AbstractDAO<Office, Integer> {
     private static final String UPDATE_OFFICE = "UPDATE offices SET building = ?, room = ? WHERE office_id = ?";
     private static final String DELETE_OFFICE = "DELETE FROM offices WHERE office_id = ?";
     private static final String SELECT_OFFICE_BY_ID = "SELECT * FROM offices WHERE office_id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM offices";
+    public static final String SELECT_ALL = "SELECT * FROM offices";
 
     public OfficeDAO(ConnectionPool connPool) {
         super(connPool);

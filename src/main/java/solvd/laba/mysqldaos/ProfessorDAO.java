@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Professor;
 
 import java.util.ArrayList;
@@ -10,13 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProfessorDAO extends AbstractDAO<Professor, Integer>{
+public class ProfessorDAO extends AbstractDAO<Professor, Integer> {
 
     private static final String INSERT_PROFESSOR = "INSERT INTO professors (professor_id, name, surname, email, department_id) VALUES (?, ?, ?, ?, ?)";
     private static final String UPDATE_PROFESSOR = "UPDATE professors SET name = ?, surname = ?, email = ?, department_id = ? WHERE professor_id = ?";
     private static final String DELETE_PROFESSOR = "DELETE FROM professors WHERE professor_id = ?";
     private static final String SELECT_PROFESSOR_BY_ID = "SELECT * FROM professors WHERE professor_id = ?";
-    private static final String SELECT_ALL_PROFESSORS = "SELECT * FROM professors";
+    public static final String SELECT_ALL_PROFESSORS = "SELECT * FROM professors";
 
 
     public ProfessorDAO(ConnectionPool connPool) {
@@ -89,7 +90,7 @@ public class ProfessorDAO extends AbstractDAO<Professor, Integer>{
     }
 
     protected Professor mapRecord(ResultSet resultSet) throws SQLException {
-        Professor ret = null;
+        Professor ret;
         int professorId = resultSet.getInt("professor_id");
         String name = resultSet.getString("name");
         String surname = resultSet.getString("surname");

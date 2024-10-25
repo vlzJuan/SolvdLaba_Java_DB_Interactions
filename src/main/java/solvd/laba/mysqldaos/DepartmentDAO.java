@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Department;
 
 import java.util.ArrayList;
@@ -16,10 +17,9 @@ public class DepartmentDAO extends AbstractDAO<Department, Integer> {
     private static final String UPDATE_DEPARTMENT = "UPDATE departments SET name = ?, office_id = ? WHERE department_id = ?";
     private static final String DELETE_DEPARTMENT = "DELETE FROM departments WHERE department_id = ?";
     private static final String SELECT_DEPARTMENT_BY_ID = "SELECT * FROM departments WHERE department_id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM departments";
+    public static final String SELECT_ALL = "SELECT * FROM departments";
 
-    public DepartmentDAO(ConnectionPool connPool) {
-        super(connPool);
+    public DepartmentDAO(ConnectionPool connPool) {super(connPool);
     }
 
     @Override

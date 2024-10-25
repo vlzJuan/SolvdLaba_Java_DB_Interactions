@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Enrollment;
 
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class EnrollmentDAO extends AbstractDAO<Enrollment, Integer> {
     private static final String UPDATE_ENROLLMENT = "UPDATE enrollments SET date = ?, student_id = ?, course_id = ?, professor_id = ?, classroom_id = ? WHERE enrollment_id = ?";
     private static final String DELETE_ENROLLMENT = "DELETE FROM enrollments WHERE enrollment_id = ?";
     private static final String SELECT_ENROLLMENT_BY_ID = "SELECT * FROM enrollments WHERE enrollment_id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM enrollments";
+    public static final String SELECT_ALL = "SELECT * FROM enrollments";
 
     public EnrollmentDAO(ConnectionPool connPool) {
         super(connPool);

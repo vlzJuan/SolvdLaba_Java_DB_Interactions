@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Student;
 
 import java.sql.Connection;
@@ -17,7 +18,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
     private static final String UPDATE_STUDENT = "UPDATE students SET name = ?, surname = ?, date_of_birth = ?, phone_number = ?, email = ?, career_id = ? WHERE student_id = ?";
     private static final String DELETE_STUDENT = "DELETE FROM students WHERE student_id = ?";
     private static final String SELECT_STUDENT_BY_ID = "SELECT * FROM students WHERE student_id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM students";
+    public static final String SELECT_ALL = "SELECT * FROM students";
 
 
     public StudentDAO(ConnectionPool connPool){

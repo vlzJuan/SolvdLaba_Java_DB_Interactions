@@ -1,6 +1,7 @@
-package solvd.laba.dao;
+package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.AbstractDAO;
 import solvd.laba.tableclasses.Exam;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class ExamDAO extends AbstractDAO<Exam, Integer> {
     private static final String UPDATE_EXAM = "UPDATE exams SET name = ?, topics_covered = ? WHERE exam_id = ?";
     private static final String DELETE_EXAM = "DELETE FROM exams WHERE exam_id = ?";
     private static final String SELECT_EXAM_BY_ID = "SELECT * FROM exams WHERE exam_id = ?";
-    private static final String SELECT_ALL = "SELECT * FROM exams";
+    public static final String SELECT_ALL = "SELECT * FROM exams";
 
     public ExamDAO(ConnectionPool connPool) {
         super(connPool);
