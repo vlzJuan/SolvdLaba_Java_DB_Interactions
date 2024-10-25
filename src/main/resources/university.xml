@@ -1,0 +1,160 @@
+<university xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="university.xsd">
+
+    <students>
+        <student>
+            <studentId>1</studentId>
+            <name>Juan</name>
+            <surname>Valenzuela</surname>
+            <dateOfBirth>1995-11-05</dateOfBirth>
+            <phoneNumber>+54999999</phoneNumber>
+            <email>juan.v@student.com</email>
+            <careerId>101</careerId>
+        </student>
+
+        <student>
+            <studentId>2</studentId>
+            <name>John</name>
+            <surname>Souls</surname>
+            <dateOfBirth>2000-06-11</dateOfBirth>
+            <phoneNumber>+54912345</phoneNumber>
+            <email>john.souls@student.com</email>
+            <careerId>201</careerId>
+        </student>
+
+        <student>
+            <studentId>3</studentId>
+            <name>John</name>
+            <surname>Wick</surname>
+            <dateOfBirth>2000-06-12</dateOfBirth>
+            <phoneNumber>+549123456</phoneNumber>
+            <email>john.wick@student.com</email>
+            <careerId>201</careerId>
+        </student>
+
+        <student>
+            <studentId>4</studentId>
+            <name>Garnt</name>
+            <surname>Wick</surname>
+            <dateOfBirth>1998-06-12</dateOfBirth>
+            <phoneNumber>+549244466</phoneNumber>
+            <email>grant.wick@student.com</email>
+            <careerId>301</careerId>
+        </student>
+
+        <student>
+            <studentId>5</studentId>
+            <name>Jane</name>
+            <surname>Thompson</surname>
+            <dateOfBirth>2000-08-12</dateOfBirth>
+            <phoneNumber>+549123465</phoneNumber>
+            <email>j.thompson@student.com</email>
+            <careerId>201</careerId>
+        </student>
+
+    </students>
+
+
+    <careers>
+        <career>
+            <careerId>101</careerId>
+            <name>Minor in Business Intelligence</name>
+            <level>Associate</level>
+            <departmentId>1</departmentId>
+        </career>
+
+        <career>
+            <careerId>201</careerId>
+            <name>Mechanical Engineering</name>
+            <level>Bachelors</level>
+            <departmentId>2</departmentId>
+        </career>
+
+        <career>
+            <careerId>201</careerId>
+            <name>Master in Embedded Engineering</name>
+            <level>Masters</level>
+            <departmentId>2</departmentId>
+        </career>
+
+        <career>
+            <careerId>301</careerId>
+            <name>Bachelor's Degree in Computer Science</name>
+            <level>Bachelors</level>
+            <departmentId>3</departmentId>
+        </career>
+
+    </careers>
+
+
+    <departments>
+        <department>
+            <departmentId>1</departmentId>
+            <name>Business</name>
+            <officeId>1</officeId>
+        </department>
+
+        <department>
+            <departmentId>2</departmentId>
+            <name>Engineering</name>
+            <officeId>2</officeId>
+        </department>
+
+        <department>
+            <departmentId>3</departmentId>
+            <name>Computer Science</name>
+            <officeId>3</officeId>
+        </department>
+
+    </departments>
+
+
+    <professors>
+        <professor>
+            <professorId>1</professorId>
+            <name>Steve</name>
+            <surname>Geobbs</surname>
+            <email>sgeobbs@university.edu.ar</email>
+            <departmentId>1</departmentId>
+        </professor>
+
+        <professor>
+            <professorId>2</professorId>
+            <name>Nikola</name>
+            <surname>Tesseract</surname>
+            <email>n.tesseract@university.edu.ar</email>
+            <departmentId>2</departmentId>
+        </professor>
+
+        <professor>
+            <professorId>3</professorId>
+            <name>Janette</name>
+            <surname>Lackless</surname>
+            <email>jlackless@university.edu</email>
+            <departmentId>3</departmentId>
+        </professor>
+    </professors>
+
+
+    <offices>
+        <office>
+            <officeId>1</officeId>
+            <building>Main Building 1</building>
+            <room>1</room>
+        </office>
+
+        <office>
+            <officeId>2</officeId>
+            <building>Main Building 2</building>
+            <room>1</room>
+        </office>
+
+        <office>
+            <officeId>3</officeId>
+            <building>Main Building 2</building>
+            <room>2</room>
+        </office>
+
+    </offices>
+
+</university>
