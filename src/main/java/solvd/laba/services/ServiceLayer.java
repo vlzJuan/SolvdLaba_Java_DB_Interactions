@@ -47,7 +47,7 @@ public class ServiceLayer {
                     break;
             case 3:
                     if(XMLInteractionLayer.validate(scan)){
-                        XMLInteractionLayer.execute();
+                        XMLInteractionLayer.execute(scan);
                     }
 
                     break;
