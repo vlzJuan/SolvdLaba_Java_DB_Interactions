@@ -2,6 +2,8 @@ package solvd.laba.services;
 
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Parameter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -46,14 +48,73 @@ public class ServiceLayer {
                 }
                 break;
             case 3:
+
+
+                XMLInteractionLayer menu = new XMLInteractionLayer();
+
                 if(XMLInteractionLayer.validate(scan)){
-                    XMLInteractionLayer.execute(scan);
-                }
+                        menu.execute(scan);
+                    }
+
 
                 break;
             default:
                     System.out.println("No valid interaction option selected, operation aborted.");
         }
     }
+
+
+
+
+    //Useful functions using reflection
+
+
+    public static Object createObjectForDAO(Scanner scanner, Object daoInstance) {
+        Object ret = null;
+        try {
+            Class<?> daoClass = daoInstance.getClass(); // Get the actual class from daoInstance param
+            Class<?> entityType = (Class<?>) ((java.lang.reflect.ParameterizedType) daoClass
+                    .getGenericSuperclass()).getActualTypeArguments()[0]; // Get the explicit argument from T.
+
+            Constructor<?> constructor = entityType.getConstructors()[0]; // The no-weird-stuff-constructor
+
+            Parameter[] params = constructor.getParameters();
+            Object[] paramValues = new Object[params.length];
+
+            System.out.println("Creating a new " + entityType.getSimpleName() + " object:");
+            for (int i = 0; i < params.length; i++) {
+                Class<?> paramType = params[i].getType();
+                System.out.print("Enter value for " + params[i].getName() + " (" + paramType.getSimpleName() + "): ");
+                String input = scanner.nextLine();
+                paramValues[i] = parseInput(input, paramType);  // Helper function for parsing
+            }
+
+            // Instantiate the entity using the collected parameter values
+            ret = constructor.newInstance(paramValues);
+
+        } catch (Exception e) {
+            System.out.println("Error creating the object. Operation aborted.");
+        }
+        return ret;
+    }
+
+    // Helper method to parse the user input based on the type
+    public static Object parseInput(String input, Class<?> paramType) {
+
+        if (paramType == int.class || paramType == Integer.class) {
+            return Integer.parseInt(input);
+        } else if (paramType == float.class || paramType == Float.class) {
+            return Float.parseFloat(input);
+        } else {
+            return input; // For String or other unsupported types
+        }
+    }
+
+
+
+
+
+
+
 
 }

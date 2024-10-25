@@ -1,4 +1,4 @@
-package solvd.laba.xml;
+package solvd.laba.xml.utilities;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
