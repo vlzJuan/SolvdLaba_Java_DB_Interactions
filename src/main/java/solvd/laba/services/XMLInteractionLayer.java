@@ -2,7 +2,6 @@ package solvd.laba.services;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import solvd.laba.dao.AbstractDAO;
 import solvd.laba.xml.XMLAbstractDAO;
 import solvd.laba.xml.daos.*;
 import solvd.laba.xml.utilities.XMLValidator;
@@ -10,10 +9,12 @@ import solvd.laba.xml.utilities.XMLValidator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,11 +23,13 @@ public class XMLInteractionLayer {
 
     private static String xmlPath = "src/main/resources/university.xml";
     private static String xsdPath = "src/main/resources/university.xsd";
-    private static Document document;
+    private static final String xmlUpdatedPath = "src/main/resources/university_update.xml";
+    private Document document;
     private static ArrayList<Object> daoInstances;
 
 
     public XMLInteractionLayer(){
+        loadDocument();
         daoInstances = new ArrayList<>();
         daoInstances.add(new XMLStudentDAO(document));
         daoInstances.add(new XMLProfessorDAO(document));
@@ -54,29 +57,45 @@ public class XMLInteractionLayer {
     }
 
     public void execute(Scanner scan){
-        if(loadDocument()){
+        if(hasDocument()){
             xmlMainMenu(scan);
         }
+        saveDocument();
         //Here, save the document.
     }
 
-    private static boolean loadDocument() {
-        boolean ret = false;
+    private void loadDocument() {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(new File(xmlPath));
-            document.getDocumentElement().normalize();
+            this.document = builder.parse(new File(xmlPath));
+            this.document.getDocumentElement().normalize();
             System.out.println("XML document loaded successfully.");
-            ret = true;
         }
         catch(IOException | ParserConfigurationException | SAXException exc){
             System.out.println("Loading of document failed. Aborting menu.");
         }
-        return ret;
     }
 
-    //private static void saveDocument();
+    private void saveDocument() {
+        try {
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+
+            transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File(xmlUpdatedPath));
+
+            transformer.transform(source, result);
+
+            System.out.println("Document saved successfully to " + xmlUpdatedPath);
+        } catch (Exception e) {
+            System.out.println("Error saving the document: " + e.getMessage());
+        }
+    }
 
     private void xmlMainMenu(Scanner scan){
 
@@ -120,7 +139,6 @@ public class XMLInteractionLayer {
 
     @SuppressWarnings("unchecked")
     private <T, ID> void xmlOperationMenu(Scanner scan, XMLAbstractDAO<T,ID> daoInstance){
-
         boolean menuLoop = true;
         int option;
         while(menuLoop){
@@ -173,6 +191,8 @@ public class XMLInteractionLayer {
         }
     }
 
-
+    public boolean hasDocument(){
+        return this.document!=null;
+    }
 
 }
