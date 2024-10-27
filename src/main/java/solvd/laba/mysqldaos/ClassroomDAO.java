@@ -1,7 +1,7 @@
 package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Classroom;
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassroomDAO extends AbstractDAO<Classroom, Integer> {
+public class ClassroomDAO extends SqlAbstractDAO<Classroom, Integer> {
 
     private static final String INSERT_CLASSROOM = "INSERT INTO classrooms (classroom_id, building, room) VALUES (?, ?, ?)";
     private static final String UPDATE_CLASSROOM = "UPDATE classrooms SET building = ?, room = ? WHERE classroom_id = ?";

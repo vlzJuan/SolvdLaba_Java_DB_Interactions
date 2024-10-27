@@ -1,7 +1,7 @@
 package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Enrollment;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.ArrayList;
 
-public class EnrollmentDAO extends AbstractDAO<Enrollment, Integer> {
+public class EnrollmentDAO extends SqlAbstractDAO<Enrollment, Integer> {
 
     //  the grade will not be modified by manual values.
 

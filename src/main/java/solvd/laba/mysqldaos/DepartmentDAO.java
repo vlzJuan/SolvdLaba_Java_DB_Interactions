@@ -1,7 +1,7 @@
 package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Department;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DepartmentDAO extends AbstractDAO<Department, Integer> {
+public class DepartmentDAO extends SqlAbstractDAO<Department, Integer> {
 
     private static final String INSERT_DEPARTMENT = "INSERT INTO departments (department_id, name, office_id) VALUES (?, ?, ?)";
     private static final String UPDATE_DEPARTMENT = "UPDATE departments SET name = ?, office_id = ? WHERE department_id = ?";

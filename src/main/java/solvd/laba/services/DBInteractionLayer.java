@@ -1,7 +1,7 @@
 package solvd.laba.services;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.mysqldaos.*;
 
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class DBInteractionLayer {
                 }
                 else{
                     processMenu = false;
-                    if(daoInstances.get(daoNum) instanceof AbstractDAO<?,?> dao){
+                    if(daoInstances.get(daoNum) instanceof SqlAbstractDAO<?,?> dao){
                         currentDao(scanner, dao);
                     }
                     else{
@@ -68,7 +68,7 @@ public class DBInteractionLayer {
     }
 
     @SuppressWarnings("unchecked")
-    private <T, ID> void currentDao(Scanner scan, AbstractDAO<T, ID> daoInstance){
+    private <T, ID> void currentDao(Scanner scan, SqlAbstractDAO<T, ID> daoInstance){
 
         boolean cont = true;
         while(cont){

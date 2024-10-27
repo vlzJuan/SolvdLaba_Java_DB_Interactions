@@ -1,7 +1,7 @@
 package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Office;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OfficeDAO extends AbstractDAO<Office, Integer> {
+public class OfficeDAO extends SqlAbstractDAO<Office, Integer> {
 
     private static final String INSERT_OFFICE = "INSERT INTO offices (office_id, building, room) VALUES (?, ?, ?)";
     private static final String UPDATE_OFFICE = "UPDATE offices SET building = ?, room = ? WHERE office_id = ?";

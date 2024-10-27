@@ -1,7 +1,7 @@
 package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Course;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDAO extends AbstractDAO<Course, Integer> {
+public class CourseDAO extends SqlAbstractDAO<Course, Integer> {
 
     private static final String INSERT_COURSE = "INSERT INTO courses (course_id, name, credits, prerequisite) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_COURSE = "UPDATE courses SET name = ?, credits = ?, prerequisite = ? WHERE course_id = ?";

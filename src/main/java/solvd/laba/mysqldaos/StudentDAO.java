@@ -1,7 +1,7 @@
 package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Student;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDAO extends AbstractDAO<Student, Integer> {
+public class StudentDAO extends SqlAbstractDAO<Student, Integer> {
 
     private static final String INSERT_STUDENT = "INSERT INTO students (student_id, name, surname, date_of_birth, phone_number, email, career_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_STUDENT = "UPDATE students SET name = ?, surname = ?, date_of_birth = ?, phone_number = ?, email = ?, career_id = ? WHERE student_id = ?";

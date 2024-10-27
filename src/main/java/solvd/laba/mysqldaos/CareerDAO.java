@@ -1,7 +1,7 @@
 package solvd.laba.mysqldaos;
 
 import solvd.laba.connections.ConnectionPool;
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Career;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CareerDAO extends AbstractDAO<Career, Integer> {
+public class CareerDAO extends SqlAbstractDAO<Career, Integer> {
 
     private static final String INSERT_CAREER = "INSERT INTO careers (career_id, name, level, department_id) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_CAREER = "UPDATE careers SET name = ?, level = ?, department_id = ? WHERE career_id = ?";

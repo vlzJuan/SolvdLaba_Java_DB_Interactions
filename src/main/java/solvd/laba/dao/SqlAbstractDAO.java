@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDAO<T, ID> implements CoreDAO<T, ID> {
+public abstract class SqlAbstractDAO<T, ID> implements CoreDAO<T, ID> {
 
     protected final ConnectionPool pool;
 
-    public AbstractDAO(ConnectionPool pool){
+    public SqlAbstractDAO(ConnectionPool pool){
         this.pool = pool;
     }
 

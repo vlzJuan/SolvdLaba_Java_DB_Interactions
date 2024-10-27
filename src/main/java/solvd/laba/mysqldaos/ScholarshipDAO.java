@@ -1,6 +1,6 @@
 package solvd.laba.mysqldaos;
 
-import solvd.laba.dao.AbstractDAO;
+import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.tableclasses.Scholarship;
 import solvd.laba.connections.ConnectionPool;
 
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ScholarshipDAO extends AbstractDAO<Scholarship, Integer> {
+public class ScholarshipDAO extends SqlAbstractDAO<Scholarship, Integer> {
 
     private static final String INSERT_SCHOLARSHIP = "INSERT INTO scholarships (scholarship_id, name, description, sponsored_percentage) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_SCHOLARSHIP = "UPDATE scholarships SET name = ?, description = ?, sponsored_percentage = ? WHERE scholarship_id = ?";
