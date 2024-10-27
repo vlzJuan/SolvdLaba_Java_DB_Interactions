@@ -2,7 +2,7 @@ package solvd.laba.services;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import solvd.laba.xml.XMLAbstractDAO;
+import solvd.laba.dao.XmlAbstractDAO;
 import solvd.laba.xml.daos.*;
 import solvd.laba.xml.utilities.XMLValidator;
 
@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static solvd.laba.services.ServiceLayer.parseInput;
+
 public class XMLInteractionLayer {
 
     private static String xmlPath = "src/main/resources/university.xml";
@@ -31,11 +33,11 @@ public class XMLInteractionLayer {
     public XMLInteractionLayer(){
         loadDocument();
         daoInstances = new ArrayList<>();
-        daoInstances.add(new XMLStudentDAO(document));
-        daoInstances.add(new XMLProfessorDAO(document));
-        daoInstances.add(new XMLOfficeDAO(document));
-        daoInstances.add(new XMLDepartmentDAO(document));
-        daoInstances.add(new XMLCareerDAO(document));
+        daoInstances.add(new XmlStudentDAO(document));
+        daoInstances.add(new XmlProfessorDAO(document));
+        daoInstances.add(new XmlOfficeDAO(document));
+        daoInstances.add(new XmlDepartmentDAO(document));
+        daoInstances.add(new XmlCareerDAO(document));
     }
 
 
@@ -122,7 +124,7 @@ public class XMLInteractionLayer {
                 }
                 else{
                     processMenu = false;
-                    if(daoInstances.get(daoNum) instanceof XMLAbstractDAO<?,?> dao){
+                    if(daoInstances.get(daoNum) instanceof XmlAbstractDAO<?,?> dao){
                         this.xmlOperationMenu(scan, dao);
                     }
                     else{
@@ -138,7 +140,7 @@ public class XMLInteractionLayer {
 
 
     @SuppressWarnings("unchecked")
-    private <T, ID> void xmlOperationMenu(Scanner scan, XMLAbstractDAO<T,ID> daoInstance){
+    private <T, ID> void xmlOperationMenu(Scanner scan, XmlAbstractDAO<T,ID> daoInstance){
         boolean menuLoop = true;
         int option;
         while(menuLoop){
@@ -153,22 +155,23 @@ public class XMLInteractionLayer {
             try{
                 option = scan.nextInt();
                 scan.nextLine();    // Flush the \n
-
+                String aux;
                 switch(option){
                     case 1:
                         daoInstance.insert((T) ServiceLayer.createObjectForDAO(scan, daoInstance));
                         break;
                     case 2:
                         System.out.println("Enter the key required to read: ");
-                        System.out.println(daoInstance.read((ID)scan.nextLine()).toString());
+                        aux = scan.nextLine();
+                        System.out.println(daoInstance.read((ID)parseInput(aux,Integer.class)));
                         break;
                     case 3:
                         daoInstance.update((T) ServiceLayer.createObjectForDAO(scan, daoInstance));
-                        System.out.println("Remove entry menu, TBI");
                         break;
                     case 4:
                         System.out.println("Enter the key required to delete: ");
-                        System.out.println(daoInstance.read((ID)scan.nextLine()).toString());
+                        aux = scan.nextLine();
+                        daoInstance.delete((ID)parseInput(aux,Integer.class));
                         break;
                     case 5:
                         System.out.println("The complete result set is:");

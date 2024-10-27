@@ -1,7 +1,5 @@
 package solvd.laba.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -12,13 +10,13 @@ import java.util.List;
  */
 public interface CoreDAO <T, ID>{
 
-    void insert(T entity) throws SQLException;
-    T read(ID id) throws SQLException;
-    void update(T entity) throws SQLException;
-    void delete(ID id) throws SQLException;
+    void insert(T entity);
+    T read(ID id);
+    void update(T entity);
+    void delete(ID id);
     //T mapRecord(ResultSet rs) throws SQLException;    //   Delegated to AbstractDAO
-    List<T> mapResultSet(ResultSet rs) throws SQLException;
-    List<T> findAll() throws SQLException;
+
+    List<T> findAll();
 
 
 }
