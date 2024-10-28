@@ -5,14 +5,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import solvd.laba.tableclasses.Office;
-import solvd.laba.xml.XMLAbstractDAO;
+import solvd.laba.dao.XmlAbstractDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLOfficeDAO extends XMLAbstractDAO<Office, Integer> {
+public class XmlOfficeDAO extends XmlAbstractDAO<Office, Integer> {
 
-    public XMLOfficeDAO(Document doc) {
+    public XmlOfficeDAO(Document doc) {
         super(doc);
     }
 

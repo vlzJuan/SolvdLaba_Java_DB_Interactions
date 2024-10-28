@@ -5,7 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import solvd.laba.tableclasses.Student;
-import solvd.laba.xml.XMLAbstractDAO;
+import solvd.laba.dao.XmlAbstractDAO;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -13,10 +13,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLStudentDAO extends XMLAbstractDAO<Student, Integer> {
+public class XmlStudentDAO extends XmlAbstractDAO<Student, Integer> {
 
 
-    public XMLStudentDAO(Document doc){
+    public XmlStudentDAO(Document doc){
         super(doc);
     }
 

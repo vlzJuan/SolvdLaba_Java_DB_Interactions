@@ -4,19 +4,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import solvd.laba.tableclasses.Department;
-import solvd.laba.xml.XMLAbstractDAO;
-import solvd.laba.xml.XMLCoreDAO;
+import solvd.laba.dao.XmlAbstractDAO;
 
 import java.util.List;
 
-public class XMLDepartmentDAO extends XMLAbstractDAO<Department, Integer> {
+public class XmlDepartmentDAO extends XmlAbstractDAO<Department, Integer> {
 
 
-
-    public XMLDepartmentDAO(Document doc){
-        super(doc);
+    public XmlDepartmentDAO(Document document) {
+        super(document);
     }
-
 
 
     @Override

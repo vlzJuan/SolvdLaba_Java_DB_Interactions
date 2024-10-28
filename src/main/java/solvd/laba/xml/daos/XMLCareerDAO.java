@@ -4,13 +4,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import solvd.laba.tableclasses.Career;
-import solvd.laba.xml.XMLAbstractDAO;
+import solvd.laba.dao.XmlAbstractDAO;
 
 import java.util.List;
 
-public class XMLCareerDAO extends XMLAbstractDAO<Career, Integer> {
+public class XmlCareerDAO extends XmlAbstractDAO<Career, Integer> {
 
-    public XMLCareerDAO(Document doc){
+    public XmlCareerDAO(Document doc){
         super(doc);
     }
 
