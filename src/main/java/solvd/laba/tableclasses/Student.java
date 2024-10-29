@@ -1,17 +1,34 @@
 package solvd.laba.tableclasses;
 
 import java.sql.Date;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import solvd.laba.jaxb.SqlDateAdapter;
 
+@XmlRootElement(name = "student")
+@XmlType(propOrder = {"studentId", "name", "surname", "dateOfBirth", "phoneNumber", "email", "careerId"})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
 
+    @XmlElement(name = "studentId")
     public int studentId;
+    @XmlElement(name = "name")
     public String name;
+    @XmlElement(name = "surname")
     public String surname;
+    @XmlElement(name = "dateOfBirth")
+    @XmlJavaTypeAdapter(SqlDateAdapter.class) // Apply the adapter for JAXB
     public Date dateOfBirth;
+    @XmlElement(name = "phoneNumber")
     public String phoneNumber;
+    @XmlElement(name = "email")
     public String email;
+    @XmlElement(name = "careerId")
     public int careerId;
-
 
     /**
      * Constructor added to properly use reflection
@@ -27,15 +44,14 @@ public class Student {
      * @param careerId      the ID for the career associated to the student.
      */
     public Student(int id, String name, String surname, String dateString,
-                   String phoneNum, String email, int careerId){
+                   String phoneNum, String email, int careerId) {
         this(id, name, surname,
                 Date.valueOf(dateString),
                 phoneNum, email, careerId);
     }
 
-
     public Student(int id, String name, String surname, Date dob,
-                   String phoneNum, String email, int careerId){
+                   String phoneNum, String email, int careerId) {
         this.studentId = id;
         this.name = name;
         this.surname = surname;
@@ -45,8 +61,12 @@ public class Student {
         this.careerId = careerId;
     }
 
+    // No-arg constructor for JAXB
+    @SuppressWarnings("unused")
+    public Student() {}
+
     @Override
-    public String toString(){
+    public String toString() {
         return "{Student " + studentId + ", full name: " + name + " " + surname + "\n"
                 + "Date of birth: " + dateOfBirth + "\n"
                 + "Phone: " + phoneNumber + "\n"
