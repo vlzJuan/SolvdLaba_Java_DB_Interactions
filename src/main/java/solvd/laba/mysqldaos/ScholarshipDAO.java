@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScholarshipDAO extends SqlAbstractDAO<Scholarship, Integer> {
@@ -107,13 +108,16 @@ public class ScholarshipDAO extends SqlAbstractDAO<Scholarship, Integer> {
     }
 
     @Override
-    public List<Scholarship> findAll() throws SQLException {
-        List<Scholarship> scholarships;
+    public List<Scholarship> findAll() {
+        List<Scholarship> scholarships = new ArrayList<>();
         Connection conn = this.pool.getConnection();
         try {
             PreparedStatement st = conn.prepareStatement(SELECT_ALL_SCHOLARSHIPS);
             ResultSet rs = st.executeQuery();
             scholarships = this.mapResultSet(rs);
+        }
+        catch(SQLException exc){
+            /// Here, handle the error or send to the MessageHandler class
         } finally {
             this.pool.releaseConnection(conn);
         }

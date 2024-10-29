@@ -97,7 +97,7 @@ public class ExamDAO extends SqlAbstractDAO<Exam, Integer> {
     }
 
     @Override
-    public List<Exam> findAll() throws SQLException {
+    public List<Exam> findAll(){
         List<Exam> exams = new ArrayList<>();
         Connection conn = this.pool.getConnection();
         try {
