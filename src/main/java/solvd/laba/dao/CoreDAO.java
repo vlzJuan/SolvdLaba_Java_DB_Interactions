@@ -14,8 +14,6 @@ public interface CoreDAO <T, ID>{
     T read(ID id);
     void update(T entity);
     void delete(ID id);
-    //T mapRecord(ResultSet rs) throws SQLException;    //   Delegated to AbstractDAO
-
     List<T> findAll();
 
 
