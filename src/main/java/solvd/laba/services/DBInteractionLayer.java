@@ -1,11 +1,11 @@
 package solvd.laba.services;
 
 import solvd.laba.connections.ConnectionPool;
+import solvd.laba.dao.CoreDAO;
 import solvd.laba.dao.SqlAbstractDAO;
 import solvd.laba.mysqldaos.*;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -53,7 +53,6 @@ public class DBInteractionLayer {
                     System.out.println("Invalid selection. Please try again.");
                 }
                 else{
-                    processMenu = false;
                     if(daoInstances.get(daoNum) instanceof SqlAbstractDAO<?,?> dao){
                         currentDao(scanner, dao);
                     }
@@ -68,7 +67,7 @@ public class DBInteractionLayer {
     }
 
     @SuppressWarnings("unchecked")
-    private <T, ID> void currentDao(Scanner scan, SqlAbstractDAO<T, ID> daoInstance){
+    private <T, ID> void currentDao(Scanner scan, CoreDAO<T, ID> daoInstance){
 
         boolean cont = true;
         while(cont){
@@ -115,9 +114,6 @@ public class DBInteractionLayer {
                 }
                 catch(InputMismatchException exc){
                     System.out.println("Error. Please enter an integer as input.");
-                }
-                catch (SQLException exc){
-                    System.out.println("Error executing the update/query");
                 }
             }
         }
