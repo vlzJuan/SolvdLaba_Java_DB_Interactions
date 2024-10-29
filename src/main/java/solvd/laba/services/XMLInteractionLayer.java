@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static solvd.laba.services.ServiceLayer.parseInput;
-
 public class XMLInteractionLayer {
 
     private static String xmlPath = "src/main/resources/university.xml";
@@ -125,7 +123,8 @@ public class XMLInteractionLayer {
                 else{
                     processMenu = false;
                     if(daoInstances.get(daoNum) instanceof XmlAbstractDAO<?,?> dao){
-                        this.xmlOperationMenu(scan, dao);
+                        ServiceLayer.currentDao(scan, dao);
+                        //this.xmlOperationMenu(scan, dao);
                     }
                     else{
                         System.out.println("Double-keyed DAO implementation TBI");
@@ -138,61 +137,6 @@ public class XMLInteractionLayer {
 
     }
 
-
-    @SuppressWarnings("unchecked")
-    private <T, ID> void xmlOperationMenu(Scanner scan, XmlAbstractDAO<T,ID> daoInstance){
-        boolean menuLoop = true;
-        int option;
-        while(menuLoop){
-            System.out.println("Select an option:");
-            System.out.println("1 - Add an entry");
-            System.out.println("2 - Read an entry");
-            System.out.println("3 - Modify an entry");
-            System.out.println("4 - Delete an entry");
-            System.out.println("5 - View all entries");
-            System.out.println("-1 - Exit the program.");
-
-            try{
-                option = scan.nextInt();
-                scan.nextLine();    // Flush the \n
-                String aux;
-                switch(option){
-                    case 1:
-                        daoInstance.insert((T) ServiceLayer.createObjectForDAO(scan, daoInstance));
-                        break;
-                    case 2:
-                        System.out.println("Enter the key required to read: ");
-                        aux = scan.nextLine();
-                        System.out.println(daoInstance.read((ID)parseInput(aux,Integer.class)));
-                        break;
-                    case 3:
-                        daoInstance.update((T) ServiceLayer.createObjectForDAO(scan, daoInstance));
-                        break;
-                    case 4:
-                        System.out.println("Enter the key required to delete: ");
-                        aux = scan.nextLine();
-                        daoInstance.delete((ID)parseInput(aux,Integer.class));
-                        break;
-                    case 5:
-                        System.out.println("The complete result set is:");
-                        for (T value: daoInstance.findAll()) {
-                            System.out.println(value);
-                        }
-                        break;
-                    case -1:
-                        menuLoop = false;
-                        break;
-                    default:
-                        System.out.println("Incorrect option. Please select another one.");
-                        break;
-                }
-            }
-            catch(InputMismatchException exc){
-                System.out.println("Error. Please input an integer.");
-            }
-
-        }
-    }
 
     public boolean hasDocument(){
         return this.document!=null;
