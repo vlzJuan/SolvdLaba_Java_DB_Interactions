@@ -1,4 +1,4 @@
-package solvd.laba.jaxb;
+package solvd.laba.jaxb.adapters;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import java.sql.Date;

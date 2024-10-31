@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import solvd.laba.jaxb.SqlDateAdapter;
+import solvd.laba.jaxb.adapters.SqlDateAdapter;
 
 @XmlRootElement(name = "student")
 @XmlType(propOrder = {"studentId", "name", "surname", "dateOfBirth", "phoneNumber", "email", "careerId"})
