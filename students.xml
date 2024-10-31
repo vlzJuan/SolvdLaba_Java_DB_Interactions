@@ -1,0 +1,52 @@
+<students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="students.xsd">
+    <student>
+        <studentId>1</studentId>
+        <name>Juan</name>
+        <surname>Valenzuela</surname>
+        <dateOfBirth>1995-11-05</dateOfBirth>
+        <phoneNumber>+54999999</phoneNumber>
+        <email>juan.v@student.com</email>
+        <careerId>101</careerId>
+    </student>
+
+    <student>
+        <studentId>2</studentId>
+        <name>John</name>
+        <surname>Souls</surname>
+        <dateOfBirth>2000-06-11</dateOfBirth>
+        <phoneNumber>+54912345</phoneNumber>
+        <email>john.souls@student.com</email>
+        <careerId>201</careerId>
+    </student>
+
+    <student>
+        <studentId>3</studentId>
+        <name>John</name>
+        <surname>Wick</surname>
+        <dateOfBirth>2000-06-12</dateOfBirth>
+        <phoneNumber>+549123456</phoneNumber>
+        <email>john.wick@student.com</email>
+        <careerId>201</careerId>
+    </student>
+
+    <student>
+        <studentId>4</studentId>
+        <name>Garnt</name>
+        <surname>Wick</surname>
+        <dateOfBirth>1998-06-12</dateOfBirth>
+        <phoneNumber>+549244466</phoneNumber>
+        <email>grant.wick@student.com</email>
+        <careerId>301</careerId>
+    </student>
+
+    <student>
+        <studentId>5</studentId>
+        <name>Jane</name>
+        <surname>Thompson</surname>
+        <dateOfBirth>2000-08-12</dateOfBirth>
+        <phoneNumber>+549123465</phoneNumber>
+        <email>j.thompson@student.com</email>
+        <careerId>201</careerId>
+    </student>
+</students>
