@@ -20,6 +20,7 @@ public class ServiceLayer {
             System.out.println("1 - Use the default program to show usage of StudentDAO");
             System.out.println("2 - Execute the DB Interaction menu, for the mySQL database.");
             System.out.println("3 - Execute the XML interaction menu, for data stored as XML in this repo.");
+            System.out.println("4 - Execute the JAXB interaction menu, for data stored as XML in this repo.");
             System.out.println("Exit menu by inputting any other integer.");
             try {
                 ret = scanner.nextInt();
@@ -51,13 +52,15 @@ public class ServiceLayer {
                 break;
             case 3:
 
-
                 XMLInteractionLayer menu = new XMLInteractionLayer();
-
                 if(XMLInteractionLayer.validate(scan)){
                         menu.execute(scan);
-                    }
+                }
+                break;
 
+            case 4:
+                JaxbInteractionLayer jaxbMenu = new JaxbInteractionLayer("src/main/resources/university.xml");
+                jaxbMenu.execute(scan);
 
                 break;
             default:
