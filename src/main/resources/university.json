@@ -1,0 +1,134 @@
+{
+  "university": {
+    "students": [
+      {
+        "studentId": 1,
+        "name": "Juan",
+        "surname": "Valenzuela",
+        "dateOfBirth": "1995-11-05",
+        "phoneNumber": "+54999999",
+        "email": "juan.v@student.com",
+        "careerId": 101
+      },
+      {
+        "studentId": 2,
+        "name": "John",
+        "surname": "Souls",
+        "dateOfBirth": "2000-06-11",
+        "phoneNumber": "+54912345",
+        "email": "john.souls@student.com",
+        "careerId": 201
+      },
+      {
+        "studentId": 3,
+        "name": "John",
+        "surname": "Wick",
+        "dateOfBirth": "2000-06-12",
+        "phoneNumber": "+549123456",
+        "email": "john.wick@student.com",
+        "careerId": 201
+      },
+      {
+        "studentId": 4,
+        "name": "Garnt",
+        "surname": "Wick",
+        "dateOfBirth": "1998-06-12",
+        "phoneNumber": "+549244466",
+        "email": "grant.wick@student.com",
+        "careerId": 301
+      },
+      {
+        "studentId": 5,
+        "name": "Jane",
+        "surname": "Thompson",
+        "dateOfBirth": "2000-08-12",
+        "phoneNumber": "+549123465",
+        "email": "j.thompson@student.com",
+        "careerId": 201
+      }
+    ],
+    "careers": [
+      {
+        "careerId": 101,
+        "name": "Minor in Business Intelligence",
+        "level": "Associate",
+        "departmentId": 1
+      },
+      {
+        "careerId": 201,
+        "name": "Mechanical Engineering",
+        "level": "Bachelors",
+        "departmentId": 2
+      },
+      {
+        "careerId": 201,
+        "name": "Master in Embedded Engineering",
+        "level": "Masters",
+        "departmentId": 2
+      },
+      {
+        "careerId": 301,
+        "name": "Bachelor's Degree in Computer Science",
+        "level": "Bachelors",
+        "departmentId": 3
+      }
+    ],
+    "departments": [
+      {
+        "departmentId": 1,
+        "name": "Business",
+        "officeId": 1
+      },
+      {
+        "departmentId": 2,
+        "name": "Engineering",
+        "officeId": 2
+      },
+      {
+        "departmentId": 3,
+        "name": "Computer Science",
+        "officeId": 3
+      }
+    ],
+    "professors": [
+      {
+        "professorId": 1,
+        "name": "Steve",
+        "surname": "Geobbs",
+        "email": "sgeobbs@university.edu.ar",
+        "departmentId": 1
+      },
+      {
+        "professorId": 2,
+        "name": "Nikola",
+        "surname": "Tesseract",
+        "email": "n.tesseract@university.edu.ar",
+        "departmentId": 2
+      },
+      {
+        "professorId": 3,
+        "name": "Janette",
+        "surname": "Lackless",
+        "email": "jlackless@university.edu",
+        "departmentId": 3
+      }
+    ],
+    "offices": [
+      {
+        "officeId": 1,
+        "building": "Main Building 1",
+        "room": "1"
+      },
+      {
+        "officeId": 2,
+        "building": "Main Building 2",
+        "room": "1"
+      },
+      {
+        "officeId": 3,
+        "building": "Main Building 2",
+        "room": "2"
+      }
+    ]
+  }
+}
