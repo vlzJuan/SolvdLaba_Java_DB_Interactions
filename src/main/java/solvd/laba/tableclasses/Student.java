@@ -1,12 +1,16 @@
 package solvd.laba.tableclasses;
 
 import java.sql.Date;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import solvd.laba.jackson.adapters.SqlDateDeserializer;
+import solvd.laba.jackson.adapters.SqlDateSerializer;
 import solvd.laba.jaxb.adapters.SqlDateAdapter;
 
 @XmlRootElement(name = "student")
@@ -16,17 +20,25 @@ public class Student {
 
     @XmlElement(name = "studentId")
     public int studentId;
+
     @XmlElement(name = "name")
     public String name;
+
     @XmlElement(name = "surname")
     public String surname;
+
     @XmlElement(name = "dateOfBirth")
-    @XmlJavaTypeAdapter(SqlDateAdapter.class) // Apply the adapter for JAXB
+    @XmlJavaTypeAdapter(SqlDateAdapter.class)
+    @JsonSerialize(using = SqlDateSerializer.class)
+    @JsonDeserialize(using = SqlDateDeserializer.class)
     public Date dateOfBirth;
+
     @XmlElement(name = "phoneNumber")
     public String phoneNumber;
+
     @XmlElement(name = "email")
     public String email;
+
     @XmlElement(name = "careerId")
     public int careerId;
 
@@ -45,9 +57,7 @@ public class Student {
      */
     public Student(int id, String name, String surname, String dateString,
                    String phoneNum, String email, int careerId) {
-        this(id, name, surname,
-                Date.valueOf(dateString),
-                phoneNum, email, careerId);
+        this(id, name, surname, Date.valueOf(dateString), phoneNum, email, careerId);
     }
 
     public Student(int id, String name, String surname, Date dob,
@@ -61,8 +71,7 @@ public class Student {
         this.careerId = careerId;
     }
 
-    // No-arg constructor for JAXB
-    @SuppressWarnings("unused")
+    // No-arg constructor for JAXB and Jackson
     public Student() {}
 
     @Override
@@ -73,6 +82,4 @@ public class Student {
                 + "E-mail: " + email + "\n"
                 + "Career id: " + careerId + "}\n";
     }
-
-
 }
