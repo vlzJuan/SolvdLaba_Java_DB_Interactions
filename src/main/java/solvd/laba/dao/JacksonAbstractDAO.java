@@ -10,13 +10,16 @@ import java.util.ArrayList;
 public abstract class JacksonAbstractDAO<T, ID> implements CoreDAO<T, ID> {
     protected final String filePath;
     protected final ObjectMapper objectMapper;
-    protected List<T> entities;
+    protected List<T> entities; // Stores specific list of dao-specific types.
 
     public JacksonAbstractDAO(String filePath) {
         this.filePath = filePath;
         this.objectMapper = new ObjectMapper();
         this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         this.entities = loadFromFile();
+        if (this.entities == null) {
+            this.entities = new ArrayList<>();
+        }
     }
 
     // Load entities from the JSON file
