@@ -54,13 +54,4 @@
         <email>s.king@gmail.com</email>
         <careerId>101</careerId>
     </student>
-    <student>
-        <studentId>19</studentId>
-        <name>Stephen</name>
-        <surname>King</surname>
-        <dateOfBirth>1980-01-01</dateOfBirth>
-        <phoneNumber>+00123</phoneNumber>
-        <email>s.king@gmail.com</email>
-        <careerId>101</careerId>
-    </student>
 </students>
