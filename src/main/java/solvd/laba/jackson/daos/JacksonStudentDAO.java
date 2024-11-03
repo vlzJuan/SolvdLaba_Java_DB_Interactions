@@ -11,20 +11,23 @@ public class JacksonStudentDAO extends JacksonAbstractDAO<Student, Integer> {
 
     public JacksonStudentDAO(String filePath) {
         super(filePath);
+        if (this.universityWrapper.getStudents() == null) {
+            this.universityWrapper.setStudents(new ArrayList<>());
+        }
     }
 
     @Override
     public void insert(Student entity) {
         // Verify unique ID condition before inserting
-        if (entities.stream().noneMatch(student -> student.studentId == entity.studentId)) {
-            entities.add(entity);
+        if (getEntityList().stream().noneMatch(student -> student.studentId == entity.studentId)) {
+            getEntityList().add(entity);
             saveToFile();
         }
     }
 
     @Override
     public Student read(Integer id) {
-        return entities.stream()
+        return getEntityList().stream()
                 .filter(student -> student.studentId == id)
                 .findFirst()
                 .orElse(null);
@@ -32,30 +35,30 @@ public class JacksonStudentDAO extends JacksonAbstractDAO<Student, Integer> {
 
     @Override
     public void update(Student entity) {
-        Optional<Student> existingStudent = entities.stream()
+        Optional<Student> existingStudent = getEntityList().stream()
                 .filter(student -> student.studentId == entity.studentId)
                 .findFirst();
 
         if (existingStudent.isPresent()) {
-            entities.remove(existingStudent.get());
-            entities.add(entity);
+            getEntityList().remove(existingStudent.get());
+            getEntityList().add(entity);
             saveToFile();
         }
     }
 
     @Override
     public void delete(Integer id) {
-        entities.removeIf(student -> student.studentId == id);
+        getEntityList().removeIf(student -> student.studentId == id);
         saveToFile();
     }
 
     @Override
     public List<Student> findAll() {
-        return new ArrayList<>(entities);
+        return new ArrayList<>(getEntityList());
     }
 
     @Override
-    protected Class<Student> getEntityClass() {
-        return Student.class;
+    protected List<Student> getEntityList() {
+        return universityWrapper.getStudents(); // Return the list of students from the wrapper
     }
 }
