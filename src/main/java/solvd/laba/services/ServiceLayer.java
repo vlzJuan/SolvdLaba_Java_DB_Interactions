@@ -21,6 +21,7 @@ public class ServiceLayer {
             System.out.println("2 - Execute the DB Interaction menu, for the mySQL database.");
             System.out.println("3 - Execute the XML interaction menu, for data stored as XML in this repo.");
             System.out.println("4 - Execute the JAXB interaction menu, for data stored as XML in this repo.");
+            System.out.println("5 - Execute the Jackson interaction menu, for data stored in the 'university.json' file");
             System.out.println("Exit menu by inputting any other integer.");
             try {
                 ret = scanner.nextInt();
@@ -51,17 +52,20 @@ public class ServiceLayer {
                 }
                 break;
             case 3:
-
                 XMLInteractionLayer menu = new XMLInteractionLayer();
                 if(XMLInteractionLayer.validate(scan)){
                         menu.execute(scan);
                 }
                 break;
-
             case 4:
                 JaxbInteractionLayer jaxbMenu = new JaxbInteractionLayer("src/main/resources/university.xml");
                 jaxbMenu.execute(scan);
+                break;
 
+            case 5:
+                JacksonInteractionLayer jacksonMenu = new JacksonInteractionLayer(
+                        "src/main/resources/university.json");
+                jacksonMenu.execute(scan);
                 break;
             default:
                     System.out.println("No valid interaction option selected, operation aborted.");
