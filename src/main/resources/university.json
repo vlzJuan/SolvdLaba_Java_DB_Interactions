@@ -1,5 +1,5 @@
 {
-  "university": {
+
     "students": [
       {
         "studentId": 1,
@@ -130,5 +130,4 @@
         "room": "2"
       }
     ]
-  }
 }
