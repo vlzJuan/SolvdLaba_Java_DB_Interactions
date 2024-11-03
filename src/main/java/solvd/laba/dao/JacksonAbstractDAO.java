@@ -2,44 +2,45 @@ package solvd.laba.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import solvd.laba.wrappers.UniversityWrapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.ArrayList;
 
 public abstract class JacksonAbstractDAO<T, ID> implements CoreDAO<T, ID> {
     protected final String filePath;
     protected final ObjectMapper objectMapper;
-    protected List<T> entities; // Stores specific list of dao-specific types.
+    protected UniversityWrapper universityWrapper; // Wrapper for all entities
 
     public JacksonAbstractDAO(String filePath) {
         this.filePath = filePath;
         this.objectMapper = new ObjectMapper();
         this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        this.entities = loadFromFile();
-        if (this.entities == null) {
-            this.entities = new ArrayList<>();
+        this.universityWrapper = loadFromFile();
+        if (this.universityWrapper == null) {
+            this.universityWrapper = new UniversityWrapper(); // Create a new wrapper if none exists
         }
     }
 
-    // Load entities from the JSON file
-    protected List<T> loadFromFile() {
+    // Load university data from the JSON file
+    protected UniversityWrapper loadFromFile() {
         try {
-            return objectMapper.readValue(new File(filePath),
-                    objectMapper.getTypeFactory().constructCollectionType(List.class, getEntityClass()));
+            return objectMapper.readValue(new File(filePath), UniversityWrapper.class);
         } catch (IOException exc) {
-            return new ArrayList<>();
+            return new UniversityWrapper(); // Return empty wrapper if unable to read
         }
     }
 
     protected void saveToFile() {
         try {
-            objectMapper.writeValue(new File(filePath), entities);
+            objectMapper.writeValue(new File(filePath), universityWrapper);
         } catch (IOException exc) {
             // Handle error log here
         }
     }
 
-    // Abstract method to get the class of the entity
-    protected abstract Class<T> getEntityClass();
+    // Abstract method to get the specific list of entities
+    protected abstract List<T> getEntityList();
+
 }
