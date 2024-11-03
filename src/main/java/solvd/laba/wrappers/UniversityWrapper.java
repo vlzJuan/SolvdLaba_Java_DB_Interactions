@@ -1,4 +1,4 @@
-package solvd.laba.jaxb.wrappers;
+package solvd.laba.wrappers;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
