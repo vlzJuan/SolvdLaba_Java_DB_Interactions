@@ -124,7 +124,6 @@ public class XMLInteractionLayer {
                     processMenu = false;
                     if(daoInstances.get(daoNum) instanceof XmlAbstractDAO<?,?> dao){
                         ServiceLayer.currentDao(scan, dao);
-                        //this.xmlOperationMenu(scan, dao);
                     }
                     else{
                         System.out.println("Double-keyed DAO implementation TBI");

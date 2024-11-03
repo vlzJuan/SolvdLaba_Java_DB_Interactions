@@ -15,6 +15,8 @@ public class MainTestJAXB {
         // Insert a new student
         Student newStudent = new Student(19, "Stephen", "Johnson", "1980-01-01", "+00123", "s.king@gmail.com", 101);
         studentService.insert(newStudent);
+        // Repeat insert. Should silently prevent insert. Handling of this issue is in the scope of the service
+        studentService.insert(newStudent);
         Student disposable = new Student(77, "Deletable", "Parca", "2000-01-01","+000", "nomaik@gmail", 201);
         studentService.insert(disposable);
         // Read a student
