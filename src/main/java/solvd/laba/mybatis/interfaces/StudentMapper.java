@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface StudentMapper extends CoreDAO<Student, Integer> {
 
-    List<Student> findByName(String name);
+    List<Student> getStudentByName(String name);
+    List<Student> getStudentBySurname(String surname);
+    List<Student> getStudentByCareerId(Integer careerId);
 
 }
