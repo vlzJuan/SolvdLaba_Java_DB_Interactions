@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StudentMapper">
+
+    <select id="getStudentById" resultType="Student">
+        SELECT * FROM students WHERE student_id = #{id}
+    </select>
+
+    <select id="getStudentByName" resultType="Student">
+        SELECT * FROM students WHERE name = #{name}
+    </select>
+
+    <select id="getStudentBySurname" resultType="Student">
+        SELECT * FROM students WHERE surname = #{surname}
+    </select>
+
+    <select id="getStudentByCareerId" resultType="Student">
+        SELECT * FROM students WHERE careerId = #{careerId}
+    </select>
+
+    <select id="getAllStudents" resultType="Student">
+        SELECT * FROM students
+    </select>
+
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO students (name, surname, date_of_birth, phone_number, email, career_id)
+        VALUES (#{name}, #{surname}, #{dateOfBirth}, #{phoneNumber}, #{email}, #{careerId})
+    </insert>
+
+    <update id="updateStudent" parameterType="Student">
+        UPDATE students
+        SET name = #{name}, surname = #{surname}, date_of_birth = #{dateOfBirth},
+        phone_number = #{phoneNumber}, email = #{email}, career_id = #{careerId}
+        WHERE student_id = #{id}
+    </update>
+
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM students WHERE student_id = #{id}
+    </delete>
+
+</mapper>
