@@ -1,0 +1,21 @@
+<!-- mybatis-config.xml -->
+<configuration>
+    <properties resource="mysqlconnection.credentials"/>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--Manual insertion of the driver used-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!-- Parameters for connection taken from local file with credentials-->
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.user}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="solvd/laba/dao/StudentMapper.xml"/>
+    </mappers>
+</configuration>
