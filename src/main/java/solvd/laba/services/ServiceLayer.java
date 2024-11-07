@@ -6,6 +6,8 @@ import solvd.laba.dao.CoreDAO;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,7 +19,7 @@ public class ServiceLayer {
         boolean continueMenu = true;
         do {
             System.out.println("Select one of the following options to begin the program:");
-            System.out.println("1 - Use the default program to show usage of StudentDAO");
+            System.out.println("1 - Execute the MyBatis interaction menu with the SQL database");
             System.out.println("2 - Execute the DB Interaction menu, for the mySQL database.");
             System.out.println("3 - Execute the XML interaction menu, for data stored as XML in this repo.");
             System.out.println("4 - Execute the JAXB interaction menu, for data stored as XML in this repo.");
@@ -40,7 +42,13 @@ public class ServiceLayer {
 
         switch(option){
             case 1:
-                TestStudentDAO.execute();
+                try {
+                    MyBatisSqlLayer batisMenu = new MyBatisSqlLayer();
+                    batisMenu.execute(scan);
+                }
+                catch (IOException exc){
+                    System.out.println("Error: Couldn't open files required for MyBatis Interaction");
+                }
                 break;
             case 2:
                 try{
@@ -103,6 +111,7 @@ public class ServiceLayer {
 
         } catch (Exception e) {
             System.out.println("Error creating the object. Operation aborted.");
+            System.out.println("Exception thrown: " + e.toString());
         }
         return ret;
     }
@@ -174,6 +183,54 @@ public class ServiceLayer {
         }
     }
 
+
+    //  CURRENTLY NOT WORKING PROPERLY
+    public static Object createObjectForClass(Scanner scanner, Class<?> daoClass) {
+        Object ret = null;
+        try {
+            // Get the entity type (T) from the implemented CoreDAO interface
+            Class<?> entityType = null;
+            Type[] interfaces = daoClass.getGenericInterfaces();
+
+            for (Type iface : interfaces) {
+                if (iface instanceof ParameterizedType) {
+                    ParameterizedType paramType = (ParameterizedType) iface;
+                    if (paramType.getRawType().equals(CoreDAO.class)) {
+                        entityType = (Class<?>) paramType.getActualTypeArguments()[0];
+                        break;
+                    }
+                }
+            }
+
+            if (entityType == null) {
+                throw new IllegalStateException("Could not determine entity type.");
+            }
+
+            // Find the constructor for the entity class (we assume it has one with parameters)
+            Constructor<?> constructor = entityType.getConstructors()[0];
+
+            Parameter[] params = constructor.getParameters();
+            Object[] paramValues = new Object[params.length];
+
+            System.out.println("Creating a new " + entityType.getSimpleName() + " object:");
+
+            // Loop through each parameter and ask for input
+            for (int i = 0; i < params.length; i++) {
+                Class<?> paramType = params[i].getType();
+                System.out.print("Enter value for " + params[i].getName() + " (" + paramType.getSimpleName() + "): ");
+                String input = scanner.nextLine();
+                paramValues[i] = parseInput(input, paramType);  // Helper function for parsing input based on type
+            }
+
+            // Instantiate the entity using the collected parameter values
+            ret = constructor.newInstance(paramValues);
+
+        } catch (Exception e) {
+            System.out.println("Error creating the object. Operation aborted.");
+            System.out.println("Exception thrown: " + e.toString());
+        }
+        return ret;
+    }
 
 
 
