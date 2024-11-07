@@ -185,17 +185,20 @@ public class ServiceLayer {
 
 
     //  CURRENTLY NOT WORKING PROPERLY
+
     public static Object createObjectForClass(Scanner scanner, Class<?> daoClass) {
         Object ret = null;
         try {
-            // Get the entity type (T) from the implemented CoreDAO interface
+            // Retrieve the entity type (T) from the implemented CoreDAO or Mapper interface
             Class<?> entityType = null;
             Type[] interfaces = daoClass.getGenericInterfaces();
 
             for (Type iface : interfaces) {
                 if (iface instanceof ParameterizedType) {
                     ParameterizedType paramType = (ParameterizedType) iface;
-                    if (paramType.getRawType().equals(CoreDAO.class)) {
+                    if (paramType.getRawType().equals(CoreDAO.class)
+                            //|| paramType.getRawType().equals(mapperClass)
+                    ) {
                         entityType = (Class<?>) paramType.getActualTypeArguments()[0];
                         break;
                     }
@@ -206,20 +209,19 @@ public class ServiceLayer {
                 throw new IllegalStateException("Could not determine entity type.");
             }
 
-            // Find the constructor for the entity class (we assume it has one with parameters)
+            // Locate the constructor of the entity class (assuming it has parameters)
             Constructor<?> constructor = entityType.getConstructors()[0];
-
             Parameter[] params = constructor.getParameters();
             Object[] paramValues = new Object[params.length];
 
             System.out.println("Creating a new " + entityType.getSimpleName() + " object:");
 
-            // Loop through each parameter and ask for input
+            // Prompt the user for each parameter and gather input values
             for (int i = 0; i < params.length; i++) {
                 Class<?> paramType = params[i].getType();
                 System.out.print("Enter value for " + params[i].getName() + " (" + paramType.getSimpleName() + "): ");
                 String input = scanner.nextLine();
-                paramValues[i] = parseInput(input, paramType);  // Helper function for parsing input based on type
+                paramValues[i] = parseInput(input, paramType);  // Use a helper function to parse input correctly
             }
 
             // Instantiate the entity using the collected parameter values
@@ -231,6 +233,41 @@ public class ServiceLayer {
         }
         return ret;
     }
+
+
+    public static <T> T createObjectForEntity(Scanner scanner, T dummyTypeInstance) {
+        T ret = null;
+        try {
+            // Get the class of the T object passed as parameter
+            Class<?> entityClass = dummyTypeInstance.getClass();
+
+            // Get the first constructor of the class (primary constructor)
+            Constructor<?> constructor = entityClass.getConstructors()[0];
+
+            // Get the parameters of the constructor
+            Parameter[] params = constructor.getParameters();
+            Object[] paramValues = new Object[params.length];
+
+            System.out.println("Creating a new " + entityClass.getSimpleName() + " object:");
+
+            // Loop through each parameter of the constructor and prompt user for input
+            for (int i = 0; i < params.length; i++) {
+                Class<?> paramType = params[i].getType();
+                System.out.print("Enter value for " + params[i].getName() + " (" + paramType.getSimpleName() + "): ");
+                String input = scanner.nextLine();
+                paramValues[i] = parseInput(input, paramType); // Helper function for parsing the input
+            }
+
+            // Instantiate the entity using the constructor and collected parameters
+            ret = (T) constructor.newInstance(paramValues);
+
+        } catch (Exception e) {
+            System.out.println("Error creating the object. Operation aborted.");
+            System.out.println("Exception thrown: " + e.toString());
+        }
+        return ret;
+    }
+
 
 
 

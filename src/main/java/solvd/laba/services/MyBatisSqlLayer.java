@@ -8,8 +8,6 @@ import solvd.laba.mybatis.interfaces.StudentMapper;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -84,10 +82,6 @@ public class MyBatisSqlLayer {
             try (SqlSession session = sqlSessionFactory.openSession()) {
                 CoreDAO<T, ID> mapper = session.getMapper(mapperClass);
 
-                // Retrieve the actual class of T at runtime
-                Class<T> entityClass = getEntityClass(mapperClass);
-
-
                 int option = scanner.nextInt();
                 scanner.nextLine(); // consume newline
                 ID id;
@@ -103,7 +97,9 @@ public class MyBatisSqlLayer {
                         //  that, by trying to take the generic T-type from an interface (instead of
                         //  an instance of an object, as it was in the ServiceClass referenced method),
                         //  the type is not properly captures and no input prompts are displayed.
-                        T newEntity = (T) ServiceLayer.createObjectForClass(scanner, entityClass);
+                        //T newEntity = (T) ServiceLayer.createObjectForClass(scanner, mapperClass);
+                        T newEntity = (T) new Object();
+                        newEntity = (T)ServiceLayer.createObjectForEntity(scanner, newEntity);
                         System.out.println(newEntity.toString());
                         mapper.insert(newEntity);
                         session.commit();
@@ -121,7 +117,7 @@ public class MyBatisSqlLayer {
                         break;
                     case 3:
                         //  Has issues too
-                        T updatedEntity = (T) ServiceLayer.createObjectForClass(scanner, entityClass);
+                        T updatedEntity = (T) ServiceLayer.createObjectForClass(scanner, mapperClass);
                         mapper.update(updatedEntity);
                         session.commit();
                         break;
@@ -158,25 +154,6 @@ public class MyBatisSqlLayer {
         }
     }
 
-    private static <T, ID> Class<T> getEntityClass(Class<? extends CoreDAO<T, ID>> mapperClass) {
-        Class<T> entityClass = null;
-        Type[] interfaces = mapperClass.getGenericInterfaces();
-
-        for (Type interfaceType : interfaces) {
-            if (interfaceType instanceof ParameterizedType) {
-                ParameterizedType paramType = (ParameterizedType) interfaceType;
-                if (paramType.getRawType().equals(CoreDAO.class)) {
-                    entityClass = (Class<T>) paramType.getActualTypeArguments()[0];
-                    break;
-                }
-            }
-        }
-
-        if (entityClass == null) {
-            throw new IllegalStateException("Could not determine entity class type.");
-        }
-        return entityClass;
-    }
 
 
 }
