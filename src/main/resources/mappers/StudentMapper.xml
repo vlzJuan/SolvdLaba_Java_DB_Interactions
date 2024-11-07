@@ -2,41 +2,45 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="StudentMapper">
+<mapper namespace="solvd.laba.mybatis.interfaces.StudentMapper">
 
-    <select id="getStudentById" resultType="Student">
+    <!-- Result Map for mapping SQL result to Student class -->
+    <resultMap id="studentResultMap" type="solvd.laba.tableclasses.Student">
+        <id property="studentId" column="student_id"/>
+        <result property="name" column="name"/>
+        <result property="surname" column="surname"/>
+        <result property="dateOfBirth" column="date_of_birth" jdbcType="DATE"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="email" column="email"/>
+        <result property="careerId" column="career_id" jdbcType="INTEGER"/> <!-- Ensures careerId is mapped correctly -->
+    </resultMap>
+
+
+    <select id="read" resultMap="studentResultMap">
         SELECT * FROM students WHERE student_id = #{id}
     </select>
 
-    <select id="getStudentByName" resultType="Student">
-        SELECT * FROM students WHERE name = #{name}
-    </select>
 
-    <select id="getStudentBySurname" resultType="Student">
-        SELECT * FROM students WHERE surname = #{surname}
-    </select>
-
-    <select id="getStudentByCareerId" resultType="Student">
-        SELECT * FROM students WHERE careerId = #{careerId}
-    </select>
-
-    <select id="getAllStudents" resultType="Student">
+    <select id="findAll" resultMap="studentResultMap">
         SELECT * FROM students
     </select>
 
-    <insert id="insertStudent" parameterType="Student">
+
+    <insert id="insert" parameterType="solvd.laba.tableclasses.Student">
         INSERT INTO students (name, surname, date_of_birth, phone_number, email, career_id)
         VALUES (#{name}, #{surname}, #{dateOfBirth}, #{phoneNumber}, #{email}, #{careerId})
     </insert>
 
-    <update id="updateStudent" parameterType="Student">
+
+    <update id="update" parameterType="solvd.laba.tableclasses.Student">
         UPDATE students
         SET name = #{name}, surname = #{surname}, date_of_birth = #{dateOfBirth},
         phone_number = #{phoneNumber}, email = #{email}, career_id = #{careerId}
         WHERE student_id = #{id}
     </update>
 
-    <delete id="deleteStudent" parameterType="int">
+
+    <delete id="delete" parameterType="int">
         DELETE FROM students WHERE student_id = #{id}
     </delete>
 
